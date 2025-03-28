@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mode 13h API Demo</title>
+  <link rel="author" href="https://topotoy.com/" />
+
+  <!-- HTML Meta Tags -->
+  <title>Mode 13h API Demo</title>
+  <meta name="description" content="Mode 13h API Demo">
+  <meta name="keywords" content="Physics">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://topotoy.com/mode13h/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mode 13h API Demo">
+  <meta property="og:description" content="Mode 13h API Demo.">
+  <meta property="og:image" content="https://topotoy.com/mode13h/cover.jpg">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="WASM-based topotoy videogame.">
+  <meta property="twitter:domain" content="topotoy.com">
+  <meta property="twitter:url" content="https://topotoy.com/mode13h/">
+  <meta name="twitter:title" content="Mode 13h API Demo">
+  <meta name="twitter:description" content="Mode 13h API Demo.">
+  <meta name="twitter:image" content="https://topotoy.com/mode13h/cover.jpg">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 800px;
+      height: 600px;
+      background-color: #000;
+      border: 0;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+      <p>Click around to test device input.</p>
+      <h2>Mode 13h API Demo</h2>
+      <p>Mode 13h API Demo.</p>
+      <p>A demo by <a href="https://topotoy.com" target="_blank">Topotoy Labs</a>.</p>
+    </div>
+  </div>
+</body>
+
+<script>
+  var Module =
+  {
+    preRun: [],
+    postRun: [],
+    canvas: (function () {
+      var canvas = document.querySelector("#canvas");
+      canvas.addEventListener("webglcontextlost", function (e) { alert("WebGL context lost. Please reload the page."); e.preventDefault(); }, false);
+      return canvas;
+    })(),
+    locateFile: function (path, prefix) {
+      if (path.endsWith(".wasm")) { return ("./" + path); }
+      if (path.endsWith(".data")) { return ("./" + path); }
+      return (prefix + path);
+    },
+    onRuntimeInitialized: function () { }
+  };
+  var wasm_is_alive = false;
+  function wasm_i(op, d0, d1, d2) { Module.ccall("wasm_i", null, ["string", "string", "string", "string"], [op, d0, d1, d2]); }
+  function wasm_o(op, d0, d1, d2) { wasm_is_alive = true; }
+</script>
+
+<script src="./mode13h-62533.js" type="text/javascript"></script>
+
+</html>
